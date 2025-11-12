@@ -1,5 +1,7 @@
 ## Hi there 👋
 
+I'm Tesvara, a junior at Stanford majoring in Management Science & Engineering and Computer Science on the systems track.
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/tesvaraj/tesvaraj/output/github-snake-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/tesvaraj/tesvaraj/output/github-snake.svg">
