@@ -1,0 +1,39 @@
+name: Generate contribution snake
+
+on:
+  schedule:
+    - cron: "0 0 * * *"     # run daily at 00:00 UTC
+  workflow_dispatch:         # allow manual runs
+  push:
+    branches: [ main ]       # re-run if you tweak the workflow
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write        # REQUIRED to push to the output branch
+    timeout-minutes: 10
+    concurrency:
+      group: snake
+      cancel-in-progress: true
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Generate light + dark snakes with a PINK snake color
+      - name: Generate snake
+        uses: Platane/snk@v3
+        with:
+          github_user_name: YOUR_USERNAME
+          outputs: |
+            dist/github-snake.svg?color_snake=%23ff69b4
+            dist/github-snake-dark.svg?palette=github-dark&color_snake=%23ff69b4
+
+      # Publish to branch "output"
+      - name: Publish SVGs
+        uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: output
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
